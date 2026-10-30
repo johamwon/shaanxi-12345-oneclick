@@ -1,0 +1,41 @@
+{
+  "province": "陕西省",
+  "city": null,
+  "platform": "陕西12345政务服务便民热线（省政府门户同域iframe平台 sx12345mhwz）",
+  "type": "spa-login-required",
+  "entry": "https://www.shaanxi.gov.cn/sx12345mhwz/website/PC/index",
+  "outerPortal": "https://www.shaanxi.gov.cn/ggbf/12345/",
+  "auth": {
+    "type": "陕西省统一身份认证（sfrz.shaanxi.gov.cn OIDC）",
+    "modes": ["password（账号+密码+图形码+短信码）", "sms（手机号+证件号后六位+图形码+短信码，免密）"],
+    "session": "state/shaanxi_session.json（storageState持久化，一次登录数日复用）",
+    "relay": "newlog.html中转页需点『确定』跳转统一认证"
+  },
+  "capabilities": {
+    "submit": {
+      "supported": true,
+      "login": "必须登录（我要留言触发 caslogin 跳转）",
+      "captcha": "图形码+短信码双段HITL；获取短信前可能前置滑块（slider.js兜底）",
+      "note": "登录后留言表单字段需真实账号首次运行实测（脚本自动dump+截图）"
+    },
+    "query": {
+      "supported": true,
+      "login": true,
+      "captcha": "同提交（进度查询同样触发登录）",
+      "note": "查询工单表单字段同样待真实登录态实测"
+    }
+  },
+  "selectors": {
+    "auth": {
+      "account": "input[placeholder=用户名/手机号码/身份证号]",
+      "password": "input[placeholder=请输入密码]",
+      "piccode": "input[name=piccode]",
+      "picImg": "#user_twofactor_code_image（刷新=改src的v时间戳参数）",
+      "smscode": "input[name=smscode]",
+      "smsBtn": ".vericode-btn（个人登录）",
+      "relayConfirm": ".layui-layer-btn0"
+    }
+  },
+  "notes": "提交与查询均需登录（三重验证HITL）。图形验证码图片 #user_twofactor_code_image，src=/web/checkcode?v=时间戳，刷新改v参数。获取短信按钮 .vericode-btn，点击后可能弹出『向右滑动完成验证』滑块（实测页面存在该元素）。登录成功判定=URL跳回 sx12345mhwz 或离开 sfrz.shaanxi.gov.cn。留言内容/受理编号等登录后表单字段需真实账号实测补全。",
+  "lastVerified": "2026-10-29"
+}
